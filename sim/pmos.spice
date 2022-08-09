@@ -1,0 +1,34 @@
+** sch_path: /home/icarosix/asic/analog/nmos_characterization/pmos3_3.sch
+**.subckt pmos3_3
+VDD net1 GND 1.8
+Vg net1 net2 0
+Vm net3 GND 0
+XM1 net3 net2 net1 net1 sky130_fd_pr__pfet_01v8_lvt L={L} W={W} nf=1 ad='int((nf+1)/2) * W/nf * 0.29'
++ as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+.lib /home/icarosix/asic/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.GLOBAL GND
+.option method=gear seed=12
+.param L=2
+.param W=1
+.DC   Vg 1u 1.8 10m
+.control
+set hcopydevtype = svg
+set nolegend
+set color0=white
+set color1=black
+set color2=blue
+set color3=red
+*****************************************************************************
+ run
+let Vgs = 1.8 - V(net2)
+let Id = -vm#branch
+let gm_id = deriv(Id)/Id 
+save all
+write all
+meas dc Vgs6 when gm_id=10
+meas dc  Id6 find Id when  Vgs=Vgs6
+plot xlabel "Vgs" ylabel "gm/Id" title "Gm over ID"   deriv(Id)/Id 
+******************************************************************************
+.endc
+.end

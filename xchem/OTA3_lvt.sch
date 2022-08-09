@@ -102,8 +102,6 @@ N 1220 -430 1240 -430 {
 lab=VDD}
 N 1000 -390 1180 -390 {
 lab=Vmid}
-N 680 -520 830 -520 {
-lab=VDD}
 N 720 -160 740 -160 {
 lab=Vcs}
 N 840 -270 920 -270 {
@@ -226,6 +224,10 @@ N 300 -350 300 -330 {
 lab=GND}
 N 300 -270 300 -240 {
 lab=#net4}
+N 690 -520 720 -520 {
+lab=VDD}
+N 720 -520 840 -520 {
+lab=VDD}
 C {devices/code_shown.sym} -820 -760 0 0 {name=NGSPICE
 only_toplevel=true
 value="
@@ -312,12 +314,12 @@ C {devices/lab_wire.sym} 780 -310 0 0 {name=l8 sig_type=std_logic lab=Vin_n}
 C {devices/lab_wire.sym} 1060 -310 0 1 {name=l9 sig_type=std_logic lab=Vin_p
 \\
 }
-C {devices/vsource.sym} -170 -450 0 0 {name=V1 value="dc 0 ac 0.1m sin(0 700u 50)"}
+C {devices/vsource.sym} -170 -450 0 0 {name=V1 value="dc 0 ac 0.1m sin(0 100u 50)"}
 C {devices/lab_wire.sym} 20 -500 3 1 {name=l10 sig_type=std_logic lab=Vin_n}
 C {devices/lab_wire.sym} -170 -500 3 1 {name=l11 sig_type=std_logic lab=Vin_p
 \\
 }
-C {devices/vsource.sym} 20 -450 0 0 {name=V3 value="dc 0 ac 0 sin(0 -700u 50)"}
+C {devices/vsource.sym} 20 -450 0 0 {name=V3 value="dc 0 ac 0 sin(0 -100u 50)"}
 C {devices/vsource.sym} -170 -370 0 0 {name=V4 value=0.9}
 C {devices/vsource.sym} 20 -370 0 0 {name=V5 value=0.9
 }
@@ -386,8 +388,8 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8_lvt.sym} 1200 -390 0 0 {name=M5
-L=0.5
-W=1.55
+L=1
+W=5.1
 nf=1
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
@@ -400,8 +402,8 @@ model=pfet_01v8_lvt
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8_lvt.sym} 1200 -160 0 0 {name=M6
-L=0.5
-W=2.075
+L=1
+W=2.90
 nf=1
 mult=1
 ad="'int((nf+1)/2) * W/nf * 0.29'" 
