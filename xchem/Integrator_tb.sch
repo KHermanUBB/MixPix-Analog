@@ -5,14 +5,12 @@ V {}
 S {}
 E {}
 T {IREF is 4x bias current} 1120 -700 0 0 0.4 0.4 {}
-N 760 -490 760 -470 { lab=V1V8}
-N 760 -410 760 -390 { lab=GND}
+N 1100 -860 1100 -840 { lab=V1V8}
+N 1100 -780 1100 -760 { lab=GND}
 N 1280 -40 1280 -20 { lab=GND}
 N 1280 -120 1280 -100 { lab=#net1}
-N 750 -160 750 -140 { lab=GND}
-N 750 -240 750 -220 { lab=#net2}
-N 750 -320 750 -300 { lab=INP}
-N 750 -320 770 -320 { lab=INP}
+N 690 -280 690 -260 { lab=GND}
+N 690 -360 690 -340 { lab=#net2}
 N 1260 -520 1260 -500 { lab=GND}
 N 1120 -520 1120 -500 { lab=V1V8}
 N 1000 -360 1020 -360 { lab=INP}
@@ -29,6 +27,9 @@ N 1360 -320 1440 -320 { lab=out}
 N 1440 -320 1710 -320 { lab=out}
 N 1710 -320 1730 -320 {
 lab=out}
+N 940 -360 1000 -360 {
+lab=INP}
+N 690 -360 880 -360 {}
 C {devices/code_shown.sym} 18.75 -1151.875 0 0 {name=NGSPICE
 only_toplevel=true
 value="
@@ -43,8 +44,8 @@ set color2=blue
 set color3=red
 
 save all
-tran 10u 100m
-plot out
+tran 10u 50m
+plot out -0.9
 ac dec 200 10 1000Meg
 settype decibel out
 plot vdb(out)
@@ -56,31 +57,31 @@ meas ac phase_margin find phase_margin_val when vdb(out)=0
 meas ac crossover_freq WHEN vdb(out)=0
 op
 
-let id1  = @m.x1.xm1.msky130_fd_pr__nfet_01v8_lvt[id]
-let id2  = @m.x1.xm2.msky130_fd_pr__nfet_01v8_lvt[id]
-let id3  = @m.x1.xm3.msky130_fd_pr__pfet_01v8_lvt[id]
-let id4  = @m.x1.xm4.msky130_fd_pr__pfet_01v8_lvt[id]
-let id5  = @m.x1.xm5.msky130_fd_pr__nfet_01v8_lvt[id]
-let id6  = @m.x1.xm6.msky130_fd_pr__pfet_01v8_lvt[id]
-let id7  = @m.x1.xm7.msky130_fd_pr__nfet_01v8_lvt[id]
-let id8  = @m.x1.xm8.msky130_fd_pr__nfet_01v8_lvt[id]
+let id1  = @m.x1.xm1.msky130_fd_pr__pfet_01v8_lvt[id]
+let id2  = @m.x1.xm2.msky130_fd_pr__pfet_01v8_lvt[id]
+let id3  = @m.x1.xm3.msky130_fd_pr__nfet_01v8_lvt[id]
+let id4  = @m.x1.xm4.msky130_fd_pr__nfet_01v8_lvt[id]
+let id5  = @m.x1.xm5.msky130_fd_pr__pfet_01v8_lvt[id]
+let id6  = @m.x1.xm6.msky130_fd_pr__nfet_01v8_lvt[id]
+let id7  = @m.x1.xm7.msky130_fd_pr__pfet_01v8_lvt[id]
+let id8  = @m.x1.xm8.msky130_fd_pr__pfet_01v8_lvt[id]
 
-let gm1  = @m.x1.xm1.msky130_fd_pr__nfet_01v8_lvt[gm]
-let gm2  = @m.x1.xm2.msky130_fd_pr__nfet_01v8_lvt[gm]
-let gm3  = @m.x1.xm3.msky130_fd_pr__pfet_01v8_lvt[gm]
-let gm4  = @m.x1.xm4.msky130_fd_pr__pfet_01v8_lvt[gm]
-let gm5  = @m.x1.xm5.msky130_fd_pr__nfet_01v8_lvt[gm]
-let gm6  = @m.x1.xm6.msky130_fd_pr__pfet_01v8_lvt[gm]
-let gm7  = @m.x1.xm7.msky130_fd_pr__nfet_01v8_lvt[gm]
-let gm8  = @m.x1.xm8.msky130_fd_pr__nfet_01v8_lvt[gm]
+let gm1  = @m.x1.xm1.msky130_fd_pr__pfet_01v8_lvt[gm]
+let gm2  = @m.x1.xm2.msky130_fd_pr__pfet_01v8_lvt[gm]
+let gm3  = @m.x1.xm3.msky130_fd_pr__nfet_01v8_lvt[gm]
+let gm4  = @m.x1.xm4.msky130_fd_pr__nfet_01v8_lvt[gm]
+let gm5  = @m.x1.xm5.msky130_fd_pr__pfet_01v8_lvt[gm]
+let gm6  = @m.x1.xm6.msky130_fd_pr__nfet_01v8_lvt[gm]
+let gm7  = @m.x1.xm7.msky130_fd_pr__pfet_01v8_lvt[gm]
+let gm8  = @m.x1.xm8.msky130_fd_pr__pfet_01v8_lvt[gm]
 
-let gds2  = @m.x1.xm2.msky130_fd_pr__nfet_01v8_lvt[gds]
-let gds4  = @m.x1.xm4.msky130_fd_pr__pfet_01v8_lvt[gds]
-let gds5  = @m.x1.xm5.msky130_fd_pr__nfet_01v8_lvt[gds]
-let gds6  = @m.x1.xm6.msky130_fd_pr__pfet_01v8_lvt[gds]
+let gds2  = @m.x1.xm2.msky130_fd_pr__pfet_01v8_lvt[gds]
+let gds4  = @m.x1.xm4.msky130_fd_pr__nfet_01v8_lvt[gds]
+let gds5  = @m.x1.xm5.msky130_fd_pr__pfet_01v8_lvt[gds]
+let gds6  = @m.x1.xm6.msky130_fd_pr__nfet_01v8_lvt[gds]
 
 
-let cgs6  = @m.x1.xm6.msky130_fd_pr__pfet_01v8_lvt[cgg]
+let cgs6  = @m.x1.xm6.msky130_fd_pr__nfet_01v8_lvt[cgg]
 
 *print v(inp)
 *print v(inm)
@@ -89,9 +90,15 @@ let v_offset = v(inp)-v(inm)
 print v_offset
 
 print cgs6
+print id1
 print id2
-*print id2
+print id3
+print id4
+print id5
 print id6
+print id7
+print id8
+
 print gm2
 print gm6
 
@@ -120,19 +127,16 @@ place=end
 format="tcleval(@value )"
 value="[sky130_models]"
 name=s1 only_toplevel=false value=blabla}
-C {devices/vsource.sym} 760 -440 0 0 {name=V1 value=1.8}
-C {devices/gnd.sym} 760 -390 0 0 {name=l2 lab=GND}
-C {devices/lab_pin.sym} 760 -490 0 0 {name=l3 sig_type=std_logic lab=V1V8
+C {devices/vsource.sym} 1100 -810 0 0 {name=V1 value=1.8}
+C {devices/gnd.sym} 1100 -760 0 0 {name=l2 lab=GND}
+C {devices/lab_pin.sym} 1100 -860 0 0 {name=l3 sig_type=std_logic lab=V1V8
 }
-C {devices/isource.sym} 1280 -70 2 0 {name=I0 value=22u
+C {devices/isource.sym} 1280 -70 0 0 {name=I0 value=25u
 }
 C {devices/gnd.sym} 1280 -20 0 0 {name=l1 lab=GND}
-C {devices/vsource.sym} 750 -190 0 0 {name=V2 value=\{CM_VOLTAGE\}}
-C {devices/gnd.sym} 750 -140 0 0 {name=l16 lab=GND}
-C {devices/vsource.sym} 750 -270 0 0 {name=V3 value="dc 0 ac 1 sin(0 100u 50)"}
-C {devices/lab_pin.sym} 770 -320 2 0 {name=l18 sig_type=std_logic lab=INP
-}
-C {devices/lab_pin.sym} 1000 -360 0 0 {name=l19 sig_type=std_logic lab=INP
+C {devices/vsource.sym} 690 -310 0 0 {name=V2 value=\{CM_VOLTAGE\}}
+C {devices/gnd.sym} 690 -260 0 0 {name=l16 lab=GND}
+C {devices/lab_pin.sym} 1000 -360 1 0 {name=l19 sig_type=std_logic lab=INP
 }
 C {devices/lab_pin.sym} 1000 -280 0 0 {name=l20 sig_type=std_logic lab=INM
 }
@@ -141,11 +145,11 @@ C {devices/lab_pin.sym} 1120 -520 0 0 {name=l21 sig_type=std_logic lab=V1V8
 C {devices/gnd.sym} 1260 -520 2 0 {name=l22 lab=GND}
 C {devices/capa.sym} 1710 -260 0 0 {name=C1
 m=1
-value=40f
+value=150f
 footprint=1206
 device="ceramic capacitor"}
 C {devices/gnd.sym} 1710 -210 0 0 {name=l24 lab=GND}
-C {devices/res.sym} 1440 -170 0 0 {name=R1
+C {devices/res.sym} 910 -360 1 0 {name=R1
 value=10E6
 footprint=1206
 device=resistor
@@ -168,4 +172,4 @@ value="
 .option wnflag=1
 "}
 C {devices/lab_pin.sym} 1730 -320 0 1 {name=l5 sig_type=std_logic lab=out}
-C {/home/icarosix/asic/MixPix/MixPix-Analog/xchem/OTA3_kh.sym} 1180 -320 0 0 {name=x1}
+C {OTA3_kh_PVersion.sym} 1180 -320 0 0 {name=x1}

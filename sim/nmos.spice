@@ -32,7 +32,7 @@ let Id = -vm#branch
 let gm_id = deriv(Id)/Id 
 save all
 write all
-meas dc Vgs2 when gm_id=15
+meas dc Vgs2 when gm_id=10
 meas dc  Id2 find Id when  Vgs=Vgs2
 *hardcopy IDoutput.svg xlabel "Vds" ylabel "Id" title "Drian current"  -I(Vm)
  plot xlabel "Vgs" ylabel "gm/Id" title "Gm over ID"   deriv(Id)/Id 
